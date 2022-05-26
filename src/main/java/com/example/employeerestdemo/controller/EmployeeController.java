@@ -26,7 +26,7 @@ public class EmployeeController {
     public ResponseEntity<?> createEmployee(@RequestBody EmployeeDto employee) {
         Assert.notNull(employee, "Employee passed is null!");
         Optional<EmployeeDto> emp = employeeService.createEmployee(employee);
-        if (emp.isEmpty()) {
+        if (!emp.isPresent()) {
             return new EmployeeCreationResponse(employee).onFailure();
         }
         return new EmployeeCreationResponse(emp.get()).onSuccess();

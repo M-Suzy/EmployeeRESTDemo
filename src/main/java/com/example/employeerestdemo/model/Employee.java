@@ -1,22 +1,25 @@
 package com.example.employeerestdemo.model;
 
+import lombok.AllArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employee", uniqueConstraints = {
         @UniqueConstraint(columnNames = "SSN",
                 name = "SSN_UK")})
+
 public class Employee{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name="ssn", length = 15,
+    @Column(name="ssn", length = 50,
             nullable = false, unique = true)
     private String SSN;
 
-    @Column(name = "first_name", length = 10, nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
-    @Column(name = "last_name", length = 15, nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
     @Column(nullable = false)
     private int age;
@@ -32,6 +35,13 @@ public class Employee{
 
 
     public Employee(){}
+
+    public Employee(String ssn, String firstName, String lastName,  int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = ssn;
+        this.age = age;
+    }
 
 
     public Long getId() {

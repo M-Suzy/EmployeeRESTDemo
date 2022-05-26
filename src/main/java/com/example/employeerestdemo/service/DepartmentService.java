@@ -32,7 +32,7 @@ public class DepartmentService {
     public List<EmployeeDto> getEmployees(Long departmentId) {
 
         Optional<Department> department = this.departmentRepository.findDepartmentWithEmployeesById(departmentId);
-        if(department.isEmpty()){
+        if(!department.isPresent()){
             return Collections.emptyList();
         }
         List<Employee> employees = department.get().getEmployees();

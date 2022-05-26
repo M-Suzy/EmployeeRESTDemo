@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 public class EmployeeDto {
     private String ssn;
     private String firstname;
-    String lastname;
-    Integer age;
+    private String lastname;
+    private Integer age;
 
     public String getSsn() {
         return ssn;
