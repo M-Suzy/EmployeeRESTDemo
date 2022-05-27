@@ -4,7 +4,9 @@ package com.example.employeerestdemo.controller;
 import com.example.employeerestdemo.dto.EmployeeDto;
 import com.example.employeerestdemo.responses.EmployeeCreationResponse;
 import com.example.employeerestdemo.responses.EmployeeLookupResponse;
+import com.example.employeerestdemo.responses.GenericPageableResponse;
 import com.example.employeerestdemo.service.EmployeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,17 @@ public class EmployeeController {
     }
 
 
+    @GetMapping
+    public ResponseEntity<GenericPageableResponse<EmployeeDto>> getEmployees(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("pageNumber") Integer pageNumber,
+            @RequestParam("pageSize") Integer pageSize
+    ) {
+        return new ResponseEntity<>(
+                employeeService.getEmployees(firstName, pageNumber, pageSize),
+                HttpStatus.OK
+        );
+    }
 
 
 }

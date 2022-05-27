@@ -1,13 +1,14 @@
 package com.example.employeerestdemo.model;
 
-import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employee", uniqueConstraints = {
         @UniqueConstraint(columnNames = "SSN",
-                name = "SSN_UK")})
+                name = "SSN_UK")},
+        indexes = @Index(name = "Idx_first_name", columnList = "first_name")
+)
 
 public class Employee{
     @Id
